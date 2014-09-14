@@ -15,26 +15,22 @@ def read_gamestat():
         logdata['mapname'] = log[2][5:]
         logdata['gametype'] = log[3][10:]
         logdata['timeleft'] = log[4][10:]
-        teams = {}
-        if logdata['gametype'] == "Capture the Flag" or logdata['gametype'] == "Infiltration":
-            teams['alpha'] = 1
-            teams['bravo'] = 1
-        elif logdata['gametype'] == "Team Deathmatch":
-            teams['charlie'] = 1
-            teams['delta'] = 1
-        else:
-            teams['noteams'] = 1
-        logdata['teams'] = teams
         teamscores = {}
-        teamscores['alpha'] = log[5][8:]
-        teamscores['bravo'] = log[6][8:]
-        teamscores['charlie'] = log[7][8:]
-        teamscores['delta'] = log[8][8:]
+        if logdata['gametype'] == "Capture the Flag" or logdata['gametype'] == "Infiltration":
+            teamscores['alpha'] = int(log[5][8:])
+            teamscores['bravo'] = int(log[6][8:])
+        elif logdata['gametype'] == "Team Deathmatch":
+            teamscores['alpha'] = int(log[5][8:])
+            teamscores['bravo'] = int(log[6][8:])
+            teamscores['charlie'] = int(log[7][8:])
+            teamscores['delta'] = int(log[8][8:])
+        logdata['teamscores'] = teamscores
         # And now for individual players.
         numplayers = logdata['numplayers']
         playerdata = []
+        players_index = log.index('Players list: (name/kills/deaths/team/ping)') + 1
         for i in xrange(numplayers):
-            pos = 10 + (i * 5)
+            pos = players_index + (i * 5)
             name = log[pos]
             points = log[pos+1]
             deaths = log[pos+2]
