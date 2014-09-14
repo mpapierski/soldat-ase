@@ -32,7 +32,7 @@ def read_gamestat():
         teamscores['delta'] = log[8][8:]
         # And now for individual players.
         numplayers = logdata['numplayers']
-        playerdata = {}
+        playerdata = []
         for i in xrange(numplayers):
             pos = 10 + (i * 5)
             name = log[pos]
