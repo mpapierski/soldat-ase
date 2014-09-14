@@ -25,19 +25,14 @@ def read_gamestat():
         else:
             teams['noteams'] = 1
         logdata['teams'] = teams
-        
-        # Team scores...
         teamscores = {}
-        
         teamscores['alpha'] = log[5][8:]
         teamscores['bravo'] = log[6][8:]
         teamscores['charlie'] = log[7][8:]
         teamscores['delta'] = log[8][8:]
-        
         # And now for individual players.
         numplayers = logdata['numplayers']
         playerdata = {}
-        
         for i in xrange(numplayers):
             pos = 10 + (i * 5)
             name = log[pos]
@@ -81,7 +76,7 @@ class ASEHandler(SocketServer.BaseRequestHandler):
         # Parse game logs
         stat = read_gamestat()
         # Game name
-        write_string('Soldat')
+        write_string('Soldat Server')
         # Port number
         write_string(cfg.get('NETWORK', 'Port'))
         # Server name
