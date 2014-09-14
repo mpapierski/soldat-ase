@@ -109,7 +109,13 @@ def main():
     # Startup
     args = sys.argv[1:]
     proc = subprocess.Popen(['./soldatserver'] + args)
-    server = SocketServer.UDPServer(('0.0.0.0', 23196), ASEHandler)
+    cfg = read_config()
+    try:
+        ase_port = cfg.getint('NETWORK', 'Port')
+    except (ConfigParser.NoSectionError, ConfigParser.NoOptionError):
+        ase_port = 23073
+    ase_port += 123
+    server = SocketServer.UDPServer(('0.0.0.0', ase_port), ASEHandler)
     th = Thread(target=server.serve_forever)
     th.daemon = True
     th.start()
