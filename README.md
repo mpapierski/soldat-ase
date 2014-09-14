@@ -20,7 +20,7 @@ http://zitrostats.sourceforge.net/
 
 LICENSE
 ====
-4-cluase BSD.
+4-clause BSD.
 
 Author
 ====
