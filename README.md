@@ -14,6 +14,11 @@ How?
 ====
 Parsing game stats log and config file gives you pretty much everything to restore ASE responses.
 
+Resources
+====
+http://zitrostats.sourceforge.net/
+
 Author
 ====
 Michal Papierski <michal@papierski.net>
+
