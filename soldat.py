@@ -102,6 +102,22 @@ class ASEHandler(SocketServer.BaseRequestHandler):
             write_string(cfg.get('NETWORK', 'Max_Players'))
         except ConfigParser.NoOptionError:
             write_string('16')
+        # Send raw data (we have no raw data?)
+        write_string('')
+        # Send players
+        for player in stat['players']:
+            flags = 0
+            flags |= 1 # Name
+            flags |= 2 # Team
+            # flags |= 4 # Skin
+            flags |= 8 # Score
+            flags |= 16 # Ping
+            # flags |= 32 # Time
+            response.write(struct.pack('>B', flags))
+            write_string(player['name']) # flags & 1
+            write_string(player['team']) # flags & 2
+            write_string(player['points']) # flags & 8
+            write_string(player['ping']) # flags & 16
         # Send data
         socket.sendto(response.getvalue(), self.client_address)
 
