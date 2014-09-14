@@ -1,4 +1,4 @@
-Soldat dedicated server removed support for ASE.
+# Soldat dedicated server removed support for ASE.
 
 What?
 ====
