@@ -59,7 +59,6 @@ class ASEHandler(SocketServer.BaseRequestHandler):
     """
     def handle(self):
         data, socket = self.request
-        sys.stderr.write('ASEHandler request from {}: {!r}\n'.format(self.client_address[0], data))
         if data != 's':
             return
         response = StringIO()
@@ -132,15 +131,10 @@ def main():
     th.daemon = True
     th.start()
     def signal_handler(signum, frame):
-        print 'Received signal', signum
         proc.send_signal(signum)
-        print 'Shutdown ASE server'
         server.shutdown()
-        print 'Wait for child process'
         proc.wait()
-        print 'Wait for ASE server'
         th.join()
-        print 'Bye'
     signal.signal(signal.SIGINT, signal_handler)
     signal.signal(signal.SIGTERM, signal_handler)
     exit_code = proc.wait()
