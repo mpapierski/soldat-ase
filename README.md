@@ -18,6 +18,10 @@ Resources
 ====
 http://zitrostats.sourceforge.net/
 
+LICENSE
+====
+4-cluase BSD.
+
 Author
 ====
 Michal Papierski <michal@papierski.net>
